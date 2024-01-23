@@ -7,7 +7,7 @@
     <mat-nav-list>
       @for (item of menuItems; track item) {
       <a mat-list-item [routerLink]="'/'+item"> 
-        {{item}} 
+        {{item | titlecase}} 
       </a>
     }
     </mat-nav-list>
@@ -23,8 +23,9 @@
           <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
         </button>
       }
-      <span>myproj</span>
+      <span>My Store</span>
     </mat-toolbar>
     <!-- Add Content Here -->
+    <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

@@ -1,0 +1,27 @@
+<div class="card-container">
+<mat-card class="dashboard-card">
+    <mat-card-content class="dashboard-card-content card1">
+        <mat-icon fontIcon="account_balance_wallet"></mat-icon>
+       <div> Quantities</div>
+        <div> <strong> {{totalQuantity}} </strong></div>
+       <span><mat-icon color="primary">arrow_upward</mat-icon> Since last month</span> 
+    </mat-card-content>
+</mat-card>
+<mat-card class="dashboard-card">
+    <mat-card-content class="dashboard-card-content card2">
+        <mat-icon fontIcon="account_balance"></mat-icon>
+        <div>Total</div>
+        <div> <strong>{{totalPrice}} TND </strong></div>
+        <span> <mat-icon color="primary">arrow_upward</mat-icon>Since last month</span> 
+    </mat-card-content>
+</mat-card>
+<mat-card class="dashboard-card">
+    <mat-card-content class="dashboard-card-content  card3">
+        
+        <mat-icon fontIcon="assessment-icon"></mat-icon>
+        <div>Sales</div>
+        <div><strong>{{totalRecords}} </strong></div>
+        <span><mat-icon color="default">arrow_downward</mat-icon>Since last month</span> 
+    </mat-card-content>
+ </mat-card>
+</div>
