@@ -8,6 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { CardComponent } from '../card/card.component';
+import { AnnualSalesChartComponent } from '../charts/annual-sales-chart/annual-sales-chart.component';
 
 @Component({
   selector: 'app-dash',
@@ -21,7 +22,8 @@ import { CardComponent } from '../card/card.component';
     MatIconModule,
     MatButtonModule,
     MatCardModule,
-    CardComponent
+    CardComponent,
+    AnnualSalesChartComponent
   ]
 })
 export class DashComponent {
