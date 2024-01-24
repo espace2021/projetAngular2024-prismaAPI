@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {MatTableModule} from '@angular/material/table';
 import { SummaryService } from '../summary.service';
-
+import {NgClass} from '@angular/common'
 export interface OrdersTableItem {
   
   id: number;
@@ -12,7 +12,7 @@ export interface OrdersTableItem {
 @Component({
   selector: 'app-orders-table',
   standalone: true,
-  imports: [MatTableModule],
+  imports: [MatTableModule,NgClass],
   templateUrl: './orders-table.component.html',
   styleUrl: './orders-table.component.scss'
 })

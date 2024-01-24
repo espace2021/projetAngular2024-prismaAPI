@@ -37,14 +37,14 @@ export class DashComponent {
         return [
           { title: 'Monthly State', cols: 1, rows: 1 },
           { title: 'Sales Chart', cols: 1, rows: 1 },
-          { title: 'Orders Table', cols: 1, rows: 1 }
+          { title: 'Orders Table', cols: 1, rows: 2 }
         ];
       }
 
       return [
         { title: 'Monthly State', cols: 2, rows: 1 },
         { title: 'Sales Chart', cols: 2, rows: 1 },
-        { title: 'Orders Table', cols: 2, rows: 1 }
+        { title: 'Orders Table', cols: 2, rows: 2 }
       ];
     })
   );
