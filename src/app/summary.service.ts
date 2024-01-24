@@ -7,38 +7,41 @@ import { Observable } from 'rxjs';
 })
 export class SummaryService {
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  url="https://dummyjson.com/carts"
-  
- 
-  getCartData(): Observable<any> {
-    return this.http.get(this.url);
+  url = "https://apigenerator.dronahq.com/api/Bz7vpOmV/orders";
+
+  getOrders(): Observable<any[]> {
+    return this.http.get<any[]>(this.url);
   }
 
-  calculateTotalQuantity(cartData: any): number {
+  calculateTotalQuantity(orders: any[]): number {
     let totalQuantity = 0;
 
-    for (const cart of cartData.carts) {
-      totalQuantity += cart.totalQuantity;
+    for (const order of orders) {
+      for (const product of order.allProduct) {
+        totalQuantity += product.quantitiy;
+      }
     }
 
     return totalQuantity;
   }
 
-  calculateTotalPrice(cartData: any): number {
-    let totalPrice = 0;
+  calculateTotalPrice(orders: any[]): number {
+    let totalPrice:number = 0;
 
-    for (const cart of cartData.carts) {
-      for (const product of cart.products) {
-        totalPrice += product.total;
+    for (const order of orders) {
+      for (const product of order.allProduct) {
+        totalPrice += product.price.toFixed(3) * product.quantitiy;
       }
     }
-
+   
     return totalPrice;
   }
 
-  calculateTotalRecords(cartData: any): number {
-    return cartData.total;
+  calculateTotalRecords(orders: any[]): number {
+    return orders.length;
   }
+
+  
 }

@@ -9,7 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { CardComponent } from '../card/card.component';
 import { AnnualSalesChartComponent } from '../charts/annual-sales-chart/annual-sales-chart.component';
-
+import { OrdersTableComponent } from '../orders-table/orders-table.component';
 @Component({
   selector: 'app-dash',
   templateUrl: './dash.component.html',
@@ -23,7 +23,8 @@ import { AnnualSalesChartComponent } from '../charts/annual-sales-chart/annual-s
     MatButtonModule,
     MatCardModule,
     CardComponent,
-    AnnualSalesChartComponent
+    AnnualSalesChartComponent,
+    OrdersTableComponent
   ]
 })
 export class DashComponent {

@@ -1,8 +1,9 @@
 <div style="display: block;">
-  <canvas baseChart width="800" height="400"
-    [type]="'line'"
+  @if (isBrowser) {
+  <canvas baseChart width="800" height="200" 
+    [type]="'bar'"
     [data]="lineChartData"
-    [options]="lineChartOptions"
     [legend]="lineChartLegend">
   </canvas>
+}
 </div>

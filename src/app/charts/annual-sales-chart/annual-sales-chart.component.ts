@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { CommonModule } from '@angular/common';
   
 import { NgChartsModule } from 'ng2-charts';
-  
-import { ChartConfiguration, ChartOptions, ChartType } from "chart.js";
+import { ChartConfiguration, ChartOptions } from "chart.js";
+
+import { SummaryService } from '../../summary.service';
 
 @Component({
   selector: 'app-annual-sales-chart',
@@ -12,47 +14,64 @@ import { ChartConfiguration, ChartOptions, ChartType } from "chart.js";
   templateUrl: './annual-sales-chart.component.html',
   styleUrl: './annual-sales-chart.component.scss'
 })
-export class AnnualSalesChartComponent {
- title = 'ng2-charts-demo';
+export class AnnualSalesChartComponent  {
+  public isBrowser: boolean;
+ title = 'sales';
+
+ constructor(private summaryService: SummaryService , @Inject(PLATFORM_ID) platformId: Object) {
+  this.isBrowser = isPlatformBrowser(platformId);
+ }
+
+ 
+public lineChartData: ChartConfiguration<'bar'>['data'] = {
+  labels: this.prepareLabels(),
+  datasets: this.prepareDatasets()
+};
+
+public lineChartLegend = true;
+ 
+// le label est l'extraction des mois à partir des dates des commandes
+prepareLabels(): any[]  {
+const labels:any[]=[]
+
+this.summaryService.getOrders().subscribe((data) => {
   
-  public lineChartData: ChartConfiguration<'line'>['data'] = {
-    labels: [
-      'January',
-      'February',
-      'March',
-      'April',
-      'May',
-      'June',
-      'July',
-      'August',
-      'September',
-      'October',
-      'November',
-      'December'
-    ],
+  data.map((order)=>{
+    const d = Number(order.createdAt.$date.$numberLong);
+    const mois = new Date(d).getMonth() + 1;
+      labels.push(mois)
+     })
+  })
+  //supprimer les valeurs redondantes array javascript
+  const uniqueArr = [...new Set(labels)]
   
-    datasets: [
-      {
-        data: [ 40, 45, 50, 55, 60, 65, 70, 75, 70, 60, 50, 45 ],
-        label: 'Angular',
+  //trier
+  const res=  uniqueArr.slice().sort((a, b) => a - b);
+ 
+return res;
+}
+
+prepareDatasets(): any[]  {
+  const datasets: any[]=[] ;
+  this.summaryService.getOrders().subscribe((data) => {
+    
+   data.map((order)=>{
+      const salesData = order.allProduct.map((product:any) => product.quantitiy);
+      datasets.push({
+        data: salesData, 
+        label: `Order ${order.id}`,
         fill: true,
         tension: 0.5,
         borderColor: 'black',
-        backgroundColor: 'rgba(255,0,0,0.3)'
-      },
-      {
-        data: [ 45, 50, 60, 70, 75, 65, 50, 60, 55, 50, 45, 45 ],
-        label: 'React',
-        fill: true,
-        tension: 0.5,
-        borderColor: 'black',
-        backgroundColor: 'rgba(0,255,0,0.3)'
-      }
-    ]
-  };
-  public lineChartOptions: ChartOptions<'line'> = {
-    responsive: false
-  };
-  
-  public lineChartLegend = true;
+        backgroundColor: `rgba(${Math.floor(
+          Math.random() * 256
+        )},${Math.floor(Math.random() * 256)},${Math.floor(
+          Math.random() * 256
+        )},0.3)`,
+      });
+    })
+  })
+  return datasets;
+}
+
 }

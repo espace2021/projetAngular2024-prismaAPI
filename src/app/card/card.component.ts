@@ -21,7 +21,7 @@ export class CardComponent implements OnInit {
   constructor(private summaryService: SummaryService) { }
 
   ngOnInit(): void {
-    this.summaryService.getCartData().subscribe(data => {
+    this.summaryService.getOrders().subscribe(data => {
       this.cartData = data;
       this.totalQuantity = this.summaryService.calculateTotalQuantity(data);
       this.totalPrice = this.summaryService.calculateTotalPrice(data);
