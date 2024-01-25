@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, afterNextRender, Inject, PLATFORM_ID } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NgChartsModule } from 'ng2-charts';
-import {NavComponent} from './nav/nav.component'
+import {NavComponent} from './nav/nav.component';
+import { isPlatformBrowser } from '@angular/common';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -11,4 +12,15 @@ import {NavComponent} from './nav/nav.component'
 })
 export class AppComponent {
   title = 'myproj';
+
+  constructor(@Inject(PLATFORM_ID) platformId: Object){
+
+  console.log(this.title);
+  
+  afterNextRender(() => {
+    console.log('Browser');
+  });
+
+   console.log(isPlatformBrowser(platformId));
+  }
 }
